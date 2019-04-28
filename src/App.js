@@ -1,8 +1,12 @@
-import React from 'react';
+// render: componentWillMount -> render -> componentDidMount
+
+// update: componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componen
+
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Movie from './Movie';
 
-const movies = [
+const movieList = [
   {
     title: 'The Avengers',
     poster: 'https://upload.wikimedia.org/wikipedia/en/f/f9/TheAvengers2012Poster.jpg'
@@ -21,12 +25,27 @@ const movies = [
   }
 ];
 
-const App = () => (
-  <div className="App">
-    {movies.map((movie, index) => (
-      <Movie title={movie.title} poster={movie.poster} key={index} />
-    ))}
-  </div>
-);
+const App = () => {
+  let [movies, setMovies] = useState();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMovies(movieList);
+    }, 3000);
+  }, []);
+
+  const _renderMovies = () => {
+    const movie = movies.map((movie, index) => (
+      <Movie title={ movie.title } poster={ movie.poster } key={ index } />
+    ));
+    return movie;
+  }
+
+  return (
+    <div className="App">
+      { movies ? _renderMovies() : 'Loading' }
+    </div>
+  );
+}
 
 export default App;
