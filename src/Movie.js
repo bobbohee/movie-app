@@ -10,7 +10,7 @@ const Movie = (props) => (
 );
 
 const MoviePoster = (props) => (
-  <img className="moviePoster" src={ props.poster } alt={ props.poster } />
+  <img className="moviePoster" src={ props.poster } alt={ props.title } />
 );
 
 Movie.propTypes = {
@@ -19,6 +19,7 @@ Movie.propTypes = {
 };
 
 MoviePoster.protoTypes = {
+  title: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired
 };
 
