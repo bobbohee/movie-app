@@ -2,7 +2,7 @@
 
 // update: componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componen
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Movie from './Movie';
 
@@ -11,15 +11,13 @@ const App = () => {
 
   useEffect(() => {
     _getMovies();
-    setTimeout(() => {}, 3000);
     // eslint-disable-next-line
   }, []);
 
   const _renderMovies = () => {
-    console.log(movies);
-    const movie = movies.map((movie, index) => (
-      <Movie title={ movie.title } poster={ movie.large_cover_image } key={ index } />
-    ));
+    const movie = movies.map((movie) => 
+      <Movie title={movie.title} poster={movie.medium_cover_image} genres={movie.genres} key={movie.id} />
+    );
     return movie;
   }
 
@@ -37,7 +35,7 @@ const App = () => {
 
   return (
     <div className="App">
-      { movies ? _renderMovies() : 'Loading' }
+      {movies ? _renderMovies() : 'Loading'}
     </div>
   );
 }
